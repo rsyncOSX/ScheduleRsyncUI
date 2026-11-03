@@ -1,0 +1,34 @@
+//
+//  Macserialnumber.swift
+//  RsyncUI
+//
+//  Created by Thomas Evensen on 24.08.2018.
+//
+
+import Foundation
+import IOKit
+
+struct Macserialnumber {
+    // private var macSerialNumber: String?
+
+    /// Function for computing MacSerialNumber
+    func getMacSerialNumber() -> String {
+        // Get the platform expert
+        let platformExpert: io_service_t = IOServiceGetMatchingService(kIOMainPortDefault,
+                                                                       IOServiceMatching("IOPlatformExpertDevice"))
+        // Get the serial number as a CFString ( actually as Unmanaged<AnyObject>! )
+        let serialNumberAsCFString = IORegistryEntryCreateCFProperty(
+            platformExpert,
+            kIOPlatformSerialNumberKey as CFString?,
+            kCFAllocatorDefault,
+            0
+        )
+        // Release the platform expert (we're responsible)
+        IOObjectRelease(platformExpert)
+        // Take the unretained value of the unmanaged-any-object
+        // (so we're not responsible for releasing it)
+        // and pass it back as a String or, if it fails, an empty string
+        // return (serialNumberAsCFString!.takeUnretainedValue() as? String) ?? ""
+        return (serialNumberAsCFString?.takeRetainedValue() as? String) ?? "C00123456789"
+    }
+}
