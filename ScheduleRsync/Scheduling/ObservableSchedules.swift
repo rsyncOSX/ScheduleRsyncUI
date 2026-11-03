@@ -263,10 +263,9 @@ final class ObservableSchedules {
             if let url = ScheduleURL.make(profile: schedule.profile ?? "Default") {
                 lastTriggeredURL = url
                 lastExecutedScheduleText = "\(schedule.profile ?? "Default") · \(Date.now.formatted(date: .abbreviated, time: .shortened)) · Test trigger delivered; RsyncUI launch disabled."
-                // Testing period: display the URL without launching RsyncUI.
-                // if NSWorkspace.shared.open(url) == false {
-                //     StorageStatus.shared.message = "Could not open RsyncUI. Install RsyncUI and try again."
-                // }
+                if NSWorkspace.shared.open(url) == false {
+                    StorageStatus.shared.message = "Could not open RsyncUI. Install RsyncUI and try again."
+                }
             }
             globaltimer.refreshTimerAfterScheduleMutation()
         }
