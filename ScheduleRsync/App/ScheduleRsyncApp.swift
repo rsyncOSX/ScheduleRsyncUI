@@ -20,10 +20,7 @@ struct ScheduleRsyncApp: App {
     var body: some Scene {
         Window("ScheduleRsync", id: "main") {
             VStack(alignment: .leading) {
-                Text("Testing mode: due schedules display their URL below. RsyncUI will not be opened.")
-                    .font(.callout)
-                    .foregroundStyle(.secondary)
-                    .padding(.horizontal)
+                
                 CalendarMonthView(schedules: schedules)
             }
             .frame(minWidth: 1000, minHeight: 700)
