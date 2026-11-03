@@ -137,7 +137,7 @@ struct CalendarMonthView: View {
         .safeAreaInset(edge: .bottom) {
             VStack(alignment: .leading, spacing: 4) {
                 Divider()
-                DisclosureGroup("Last scheduled URL (testing)") {
+                DisclosureGroup("Last scheduled URL") {
                     Text(schedules.lastTriggeredURL?.absoluteString ?? "Waiting for a schedule to fire…")
                         .textSelection(.enabled)
                         .frame(maxWidth: .infinity, alignment: .leading)
